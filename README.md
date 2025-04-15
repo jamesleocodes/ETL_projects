@@ -86,19 +86,23 @@ This project processes car-related data, extracting fields such as `year_of_manu
 
 ```
 etl/
-├── data/                       # Sample data files for person data
-├── data_car/                   # Sample data files for car data
-|── data_scrapeMovies /         # Sample data files for films
-├── scripts/                    # ETL scripts
-  ├── etl_test.py               # ETL script for person data
-  ├── etl_car.py                # ETL script for car data
-  └── etl_webscrape_movies.py   # ETL script for film data 
-├── tests/                      # Unit tests
-  ├── test_etl_car.py          # Unit test for etl car
-  └── test_etl_person.py        # Unit test for etl person
-├── config.yaml                 # Configuration file
-├── requirements.txt            # Python dependencies
-└── README.md                   # Project documentation
+├── data/
+│   ├── person/                     # Sample data files for person data
+│   ├── car/                        # Sample data files for car data
+│   └── movies/                     # Sample data files for movie data
+├── output/                         # Processed data (e.g., CSVs, SQLite DBs)
+├── src/                            # ETL scripts (renamed from scripts/)
+│   ├── etl_person.py               # ETL script for person data (renamed from etl_test.py)
+│   ├── etl_car.py                  # ETL script for car data
+│   └── etl_webscrape_movies.py     # ETL script for movie data 
+├── tests/
+│   ├── test_etl_person.py          # Unit test for etl_person.py
+│   ├── test_etl_car.py             # Unit test for etl_car.py
+│   └── test_etl_movies.py          # Unit test for etl_movies.py (new)
+├── config.yaml                     # Configuration file
+├── requirements.txt                # Python dependencies
+├── .gitignore                      # Git ignore file
+└── README.md                       # Project documentation
 
 ```
 

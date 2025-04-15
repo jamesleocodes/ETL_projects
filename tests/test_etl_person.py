@@ -6,7 +6,7 @@ import yaml
 import sys
 import os
 
-sys.path.append("../scripts")  # Adjust path as needed
+sys.path.append("../src")  # Adjust path as needed
 from etl_person import (
     extract_from_csv,
     extract_from_json,

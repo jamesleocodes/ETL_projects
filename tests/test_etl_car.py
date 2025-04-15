@@ -3,7 +3,7 @@ from unittest.mock import patch, mock_open, MagicMock
 import pandas as pd
 import sys
 
-sys.path.append("../scripts")
+sys.path.append("../src")
 from etl_car import (
     extract_from_csv,
     extract_from_json,
