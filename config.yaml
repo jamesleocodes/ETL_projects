@@ -2,7 +2,7 @@ etl_person:
   source:
     type: file
     format: [csv, json, xml]
-    location: data/
+    location: ../data/
   transformation:
     height:
       unit: meters
@@ -12,25 +12,33 @@ etl_person:
       precision: 2
   target:
     type: file
-    location: data/transformed_data.csv
+    location: ../data/transformed_data.csv
   logging:
-    location: data/log_file.txt
+    location: ../data/log_file.txt
 
 etl_car:
   source:
     type: file
     format: [csv, json, xml]
-    location: data_car/
+    location: ../data_car/
   transformation:
     price:
       precision: 2
   target:
     type: file
-    location: data_car/transformed_data.csv
+    location: ../data_car/transformed_data.csv
   logging:
-    location: data_car/log_file.txt
+    location: ../data_car/log_file.txt
 
+etl_webscrape_movies:
+  source:
+    type: web
+    url: https://web.archive.org/web/20230902185655/https://en.everybodywiki.com/100_Most_Highly-Ranked_Films
+    db_name: films
+    table_name: Top_50
+    location: ../data_scrapeMovies/top_50_films.csv
 settings:
   python_version: "3.8+"
   dependencies:
     - requirements.txt
+

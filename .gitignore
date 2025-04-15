@@ -1,0 +1,39 @@
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Environment and IDE
+.env
+.venv/
+venv/
+*.swp
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Testing and logs
+*.log
+pytest_cache/
+.pytest_cache/
+coverage/
+*.cov
+htmlcov/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Project-specific
+data/
+output/
+tmp/
+*.bak
+*.temp

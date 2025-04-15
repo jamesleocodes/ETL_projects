@@ -88,13 +88,15 @@ This project processes car-related data, extracting fields such as `year_of_manu
 etl/
 ├── data/               # Sample data files for person data
 ├── data_car/           # Sample data files for car data
+|── data_scrapeMovies /  # Sample data files for films
 ├── scripts/            # ETL scripts
 ├── tests/              # Unit tests
 ├── config.yaml         # Configuration file
 ├── requirements.txt    # Python dependencies
 ├── README.md           # Project documentation
 ├── etl_test.py         # ETL script for person data
-└── etl_car.py          # ETL script for car data
+├── etl_car.py          # ETL script for car data
+└── etl_webscrape_movies.py   # ETL script for film data
 ```
 
 ## Contributing
