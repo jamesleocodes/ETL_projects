@@ -80,6 +80,65 @@ This project processes car-related data, extracting fields such as `year_of_manu
    - Transformed data: `data_car/transformed_data.csv`
    - Logs: `data_car/log_file.txt`
 
+### Movies: ETL for Movies Data (`etl_webscrape_movies.py`)
+
+#### Overview
+This project processes movie-related data by scraping information from a webpage. It extracts fields such as `Average Rank`, `Film`, and `Year`, and saves the data into a CSV file and a MySQL database.
+
+#### Features
+- **Extraction**: Scrapes movie data from a webpage using `BeautifulSoup`.
+- **Transformation**: Cleans and structures the scraped data into a tabular format.
+- **Loading**: 
+  - Saves the transformed data into a CSV file.
+  - Inserts the data into a MySQL database table.
+- **Configuration**: Dynamically loads configurations (e.g., URL, database name, table name, and file paths) from a `config.yaml` file.
+
+#### How to Run
+1. Ensure the `config.yaml` file is correctly configured with the following keys:
+   ```yaml
+   etl_webscrape_movies:
+    source:
+      type: web
+      url: https://web.archive.org/web/20230902185655/https://en.everybodywiki.com/100_Most_Highly-Ranked_Films
+      db_name: films
+      table_name: Top_50
+      location: ../data_scrapeMovies/top_50_films.csv
+   ```
+2. Run the script:
+   ```bash
+   python3 etl_webscrape_movies.py
+   ```
+3. Check the output:
+   - Transformed data: `data/movies/movies_data.csv`
+   - MySQL database: Data inserted into the `movies` table in the `films` database.
+
+#### Requirements
+- **Python Libraries**:
+  - `requests`
+  - `pandas`
+  - `BeautifulSoup4`
+  - `PyYAML`
+  - `SQLAlchemy`
+  - `mysql-connector-python`
+- **MySQL Database**: Ensure a MySQL server is running locally or remotely.
+
+#### Example Output
+- **CSV File**:
+  ```
+  Average Rank,Film,Year
+  1,The Shawshank Redemption,1994
+  2,The Godfather,1972
+  ...
+  ```
+- **MySQL Table**:
+  ```
+  +---------------+---------------------------+------+
+  | Average Rank  | Film                      | Year |
+  +---------------+---------------------------+------+
+  | 1             | The Shawshank Redemption  | 1994 |
+  | 2             | The Godfather             | 1972 |
+  +---------------+---------------------------+------+
+  ```
 ---
 
 ## Project Structure
