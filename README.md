@@ -30,7 +30,7 @@ This project is a basic implementation of an ETL (Extract, Transform, Load) pipe
 1. Configure the ETL pipeline by editing the `config.yaml` file.
 2. Run the ETL script:
   ```bash
-  python etl_test.py
+  python etl_person.py
   python etl_car.py
   ```
 
@@ -51,7 +51,7 @@ This project processes person-related data, extracting fields such as `name`, `h
 1. Place your input files (`.csv`, `.json`, `.xml`) in the `data` directory.
 2. Run the ETL script:
    ```bash
-   python3 etl_test.py
+   python3 etl_person.py
    ```
 3. Check the output:
    - Transformed data: `data/transformed_data.csv`
