@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 
 # Introduce the file path
-log_file = "log_file.txt"
-target_file = "transformed_data.csv"
+log_file = "data/log_file.txt"
+target_file = "data/transformed_data.csv"
 
 # Develop functions to extract data from different formats
 # from csv
@@ -18,7 +18,7 @@ def extract_from_csv(file_to_process):
 # from json
 def extract_from_json(file_to_process):
     """Extract data from json file"""
-    dataframe = pd.read_json(file_to_process)
+    dataframe = pd.read_json(file_to_process,lines=True)
     return dataframe
 
 # from xml
@@ -36,19 +36,19 @@ def extract_from_xml(file_to_process):
 
 # write a function to call the respective function based on the file type
 def extract():
-    extracted_data = pd.DataFrame(columns =['name','height','weight'])
+    extracted_data = pd.DataFrame(columns=['name', 'height', 'weight'])
 
-    # process all csv files, except the target file
-    for csvfile in glob.glob("*.csv"):
+    # process all csv files in the data folder, except the target file
+    for csvfile in glob.glob("data/*.csv"):
         if csvfile != target_file:
             extracted_data = pd.concat([extracted_data, extract_from_csv(csvfile)], ignore_index=True)
     
-    # process all json files
-    for jsonfile in glob.glob("*.json"):
+    # process all json files in the data folder
+    for jsonfile in glob.glob("data/*.json"):
         extracted_data = pd.concat([extracted_data, extract_from_json(jsonfile)], ignore_index=True)
     
-    # process all xml files
-    for xmlfile in glob.glob("*.xml"):
+    # process all xml files in the data folder
+    for xmlfile in glob.glob("data/*.xml"):
         extracted_data = pd.concat([extracted_data, extract_from_xml(xmlfile)], ignore_index=True)
     
     return extracted_data
@@ -67,10 +67,39 @@ def load_data(target_file, transformed_data):
 
   
 # Log the process
-def log_process(message):
+def log_progress(message):
     """Log the process"""
     timestamp_format = '%Y-%h-%d-%H:%M:%S' # Year-Monthname-Day-Hour-Minute-Second
     now = datetime.now()
     timestamp = now.strftime(timestamp_format)
     with open(log_file, 'a') as f:
         f.write(f"{timestamp} - {message}\n")
+
+# Log the initialization of the ETL process 
+log_progress("ETL Job Started") 
+ 
+# Log the beginning of the Extraction process 
+log_progress("Extract phase Started") 
+extracted_data = extract() 
+ 
+# Log the completion of the Extraction process 
+log_progress("Extract phase Ended") 
+ 
+# Log the beginning of the Transformation process 
+log_progress("Transform phase Started") 
+transformed_data = transform(extracted_data) 
+print("Transformed Data") 
+print(transformed_data) 
+ 
+# Log the completion of the Transformation process 
+log_progress("Transform phase Ended") 
+ 
+# Log the beginning of the Loading process 
+log_progress("Load phase Started") 
+load_data(target_file,transformed_data) 
+ 
+# Log the completion of the Loading process 
+log_progress("Load phase Ended") 
+ 
+# Log the completion of the ETL process 
+log_progress("ETL Job Ended") 
