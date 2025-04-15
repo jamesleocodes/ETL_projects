@@ -34,7 +34,7 @@ This project is a basic implementation of an ETL (Extract, Transform, Load) pipe
   python etl_car.py
   ```
 
-### metric: ETL for Person Data (`etl_test.py`)
+### Person: ETL for Person Data (`etl_test.py`)
 
 #### Overview
 This project processes person-related data, extracting fields such as `name`, `height`, and `weight`. The pipeline converts height from inches to meters and weight from pounds to kilograms.
@@ -85,7 +85,7 @@ This project processes car-related data, extracting fields such as `year_of_manu
 ## Project Structure
 
 ```
-simple_etl/
+etl/
 ├── data/               # Sample data files for person data
 ├── data_car/           # Sample data files for car data
 ├── scripts/            # ETL scripts
