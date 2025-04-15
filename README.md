@@ -109,8 +109,8 @@ This project processes movie-related data by scraping information from a webpage
    python3 etl_webscrape_movies.py
    ```
 3. Check the output:
-   - Transformed data: `data/movies/movies_data.csv`
-   - MySQL database: Data inserted into the `movies` table in the `films` database.
+   - Transformed data: `data_scrapeMovies/top_50_films.csv`
+   - MySQL database: Data inserted into the `Top_50` table in the `films` database.
 
 #### Requirements
 - **Python Libraries**:
