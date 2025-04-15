@@ -3,10 +3,15 @@ import glob
 import pandas as pd
 import xml.etree.ElementTree as ET
 from datetime import datetime
+import yaml
+# Load configuration from config.yaml
+with open("config.yaml", 'r') as stream:
+    config = yaml.safe_load(stream)
 
-# Introduce the file path
-log_file = "data_car/log_file.txt"
-target_file = "data_car/transformed_data.csv"
+# Get paths dynamically from config.yaml
+log_file = config['etl_car']['logging']['location']
+target_file = config['etl_car']['target']['location']
+data_folder = config['etl_car']['source']['location']
 
 # Develop functions to extract data from different formats
 # from csv
@@ -36,23 +41,25 @@ def extract_from_xml(file_to_process):
     return dataframe
 
 # write a function to call the respective function based on the file type
+# Function to handle extraction based on file type
 def extract():
-    extracted_data = pd.DataFrame(columns=['year_of_manufacture','price','fuel'])
+    extracted_data = pd.DataFrame(columns=['year_of_manufacture', 'price', 'fuel'])
 
-    # process all csv files in the data folder, except the target file
-    for csvfile in glob.glob("data_car/*.csv"):
+    # Process all csv files in the data folder
+    for csvfile in glob.glob(f"{data_folder}/*.csv"):
         if csvfile != target_file:
             extracted_data = pd.concat([extracted_data, extract_from_csv(csvfile)], ignore_index=True)
-    
-    # process all json files in the data folder
-    for jsonfile in glob.glob("data_car/*.json"):
+
+    # Process all json files in the data folder
+    for jsonfile in glob.glob(f"{data_folder}/*.json"):
         extracted_data = pd.concat([extracted_data, extract_from_json(jsonfile)], ignore_index=True)
-    
-    # process all xml files in the data folder
-    for xmlfile in glob.glob("data_car/*.xml"):
+
+    # Process all xml files in the data folder
+    for xmlfile in glob.glob(f"{data_folder}/*.xml"):
         extracted_data = pd.concat([extracted_data, extract_from_xml(xmlfile)], ignore_index=True)
-    
+
     return extracted_data
+
 
 # Transform the data
 def transform(data):

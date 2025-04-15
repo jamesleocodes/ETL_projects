@@ -4,9 +4,16 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
-# Introduce the file path
-log_file = "data/log_file.txt"
-target_file = "data/transformed_data.csv"
+import yaml  # Import PyYAML for reading config files
+
+# Load configuration from config.yaml
+with open("config.yaml", 'r') as stream:
+    config = yaml.safe_load(stream)
+
+# Get paths dynamically from config.yaml
+log_file = config['etl_person']['logging']['location']
+target_file = config['etl_person']['target']['location']
+data_folder = config['etl_person']['source']['location']
 
 # Develop functions to extract data from different formats
 # from csv
@@ -39,16 +46,16 @@ def extract():
     extracted_data = pd.DataFrame(columns=['name', 'height', 'weight'])
 
     # process all csv files in the data folder, except the target file
-    for csvfile in glob.glob("data/*.csv"):
+    for csvfile in glob.glob(f"{data_folder}/*.csv"):
         if csvfile != target_file:
             extracted_data = pd.concat([extracted_data, extract_from_csv(csvfile)], ignore_index=True)
     
     # process all json files in the data folder
-    for jsonfile in glob.glob("data/*.json"):
+    for jsonfile in glob.glob(f"{data_folder}/*.json"):
         extracted_data = pd.concat([extracted_data, extract_from_json(jsonfile)], ignore_index=True)
     
     # process all xml files in the data folder
-    for xmlfile in glob.glob("data/*.xml"):
+    for xmlfile in glob.glob(f"{data_folder}/*.xml"):
         extracted_data = pd.concat([extracted_data, extract_from_xml(xmlfile)], ignore_index=True)
     
     return extracted_data
