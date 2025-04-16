@@ -37,6 +37,15 @@ etl_webscrape_movies:
     db_name: films
     table_name: Top_50
     location: ../data_scrapeMovies/top_50_films.csv
+
+etl_gdp:
+  source:
+    type: web
+    url: https://web.archive.org/web/20230902185326/https://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28nominal%29
+    db_name: world_economies
+    table_name: countries_by_gdp
+    location: ../data_gdp/countries_by_gdp.csv
+
 settings:
   python_version: "3.8+"
   dependencies:
