@@ -44,7 +44,10 @@ etl_gdp:
     url: https://web.archive.org/web/20230902185326/https://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28nominal%29
     db_name: world_economies
     table_name: countries_by_gdp
+    table_attribs: ['Country', 'GDP_USD_billions']
     location: ../data_gdp/countries_by_gdp.csv
+  logging:
+    location: ../data_gdp/log_file.txt
 
 settings:
   python_version: "3.8+"

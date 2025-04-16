@@ -148,12 +148,14 @@ etl/
 ├── data/
 │   ├── person/                     # Sample data files for person data
 │   ├── car/                        # Sample data files for car data
-│   └── movies/                     # Sample data files for movie data
+│   ├── movies/                     # Sample data files for movie data
+│   └── gdp/                        # Sample data files for gdp by countries
 ├── output/                         # Processed data (e.g., CSVs, SQLite DBs)
 ├── src/                            # ETL scripts (renamed from scripts/)
 │   ├── etl_person.py               # ETL script for person data (renamed from etl_test.py)
 │   ├── etl_car.py                  # ETL script for car data
-│   └── etl_webscrape_movies.py     # ETL script for movie data 
+│   ├── etl_webscrape_movies.py     # ETL script for movie data 
+│   └── etl_gdp.py                  # ETL script for gdp scraping
 ├── tests/
 │   ├── test_etl_person.py          # Unit test for etl_person.py
 │   ├── test_etl_car.py             # Unit test for etl_car.py
