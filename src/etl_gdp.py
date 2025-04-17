@@ -33,8 +33,10 @@ def extract(url, table_attribs):
     df = pd.DataFrame(
         columns=table_attribs
     )  # Create an empty dataframe with the required columns
-    tables = data.find_all("tbody")  # Locate the table based on the table_attribs
-    rows = tables[2].find_all("tr")  # Extract rows with hyperlinks and required columns
+    # Locate the table based on the table_attribs
+    tables = data.find_all("tbody")
+    # Extract rows with hyperlinks and required columns
+    rows = tables[2].find_all("tr")
     for row in rows:  # Iterate through each row in the table
         col = row.find_all("td")  # Find all the columns in the row
         if len(col) != 0:  # Check if the row is not empty
@@ -53,9 +55,11 @@ def transform(df):
     format to float value, transforms the information of GDP from
     USD (Millions) to USD (Billions) rounding to 2 decimal places.
     The function returns the transformed dataframe."""
-    GDP_list = df["GDP_USD_millions"].tolist()  # Convert the GDP column to a list
+    GDP_list = df["GDP_USD_millions"].tolist(
+    )  # Convert the GDP column to a list
     # Handle special characters like '—' and convert to float
-    GDP_list = [float("".join(x.split(","))) if x != "—" else 0.0 for x in GDP_list]
+    GDP_list = [float("".join(x.split(","))) if x !=
+                "—" else 0.0 for x in GDP_list]
     GDP_list = [np.round(x / 1000, 2) for x in GDP_list]
     df["GDP_USD_millions"] = GDP_list
     df = df.rename(columns={"GDP_USD_millions": "GDP_USD_billions"})

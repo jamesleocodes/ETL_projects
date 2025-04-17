@@ -48,10 +48,10 @@ def log_progress(message):
 # extract function
 def extract(url):
     """Extracts bank data from a webpage based on the provided URL.
-    
+
     Args:
         url (str): URL of the webpage containing bank data
-        
+
     Returns:
         pandas.DataFrame: DataFrame containing extracted bank data
     """
@@ -87,11 +87,11 @@ def extract(url):
 # transform function
 def transform(dataframe, csv_file):
     """Transforms bank data by adding columns for market capitalization in different currencies.
-    
+
     Args:
         dataframe (pandas.DataFrame): DataFrame containing bank data
         csv_file (str): Path to CSV file with currency exchange rates
-        
+
     Returns:
         pandas.DataFrame: Transformed DataFrame with additional currency columns
     """
