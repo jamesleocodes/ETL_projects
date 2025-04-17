@@ -12,6 +12,7 @@ This project is a basic implementation of an ETL (Extract, Transform, Load) pipe
 
 - Python 3.8+
 - Required libraries are listed in `requirements.txt`.
+- Ensure MySQL is already set up and running locally on your system. Please see how to set up mysql in your system in setupSQL.md file.
 
 ## Installation
 
