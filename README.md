@@ -1,3 +1,12 @@
+## Repository Stats
+
+- **Commits:** ![GitHub commit count](https://img.shields.io/github/commit-activity/m/USERNAME/REPOSITORY)
+- **Clones:** (Data not directly available but can be added manually using external scripts)
+- **Visitors:** ![Visitor Count](https://visitor-badge.glitch.me/badge?page_id=USERNAME.REPOSITORY)
+
+
+
+
 # ETL Project
 
 This project is a basic implementation of an ETL (Extract, Transform, Load) pipeline. It demonstrates how to extract data from a source, transform it to meet specific requirements, and load it into a target destination.
