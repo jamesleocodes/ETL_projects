@@ -67,8 +67,7 @@ def extract_from_xml(file_to_process):
 # write a function to call the respective function based on the file type
 # Function to handle extraction based on file type
 def extract():
-    extracted_data = pd.DataFrame(
-        columns=["year_of_manufacture", "price", "fuel"])
+    extracted_data = pd.DataFrame(columns=["year_of_manufacture", "price", "fuel"])
 
     # Process all csv files in the data folder
     for csvfile in glob.glob(f"{data_folder}/*.csv"):
