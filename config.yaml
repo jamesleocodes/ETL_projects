@@ -48,6 +48,18 @@ etl_gdp:
     location: ../data_gdp/countries_by_gdp.csv
   logging:
     location: ../data_gdp/log_file.txt
+etl_bank:
+  source:
+    type: web
+    url : https://web.archive.org/web/20230908091635 /https://en.wikipedia.org/wiki/List_of_largest_banks
+    db_name : Banks
+    table_name : Largest_banks
+    table_attribs : ['Name', 'MC_USD_Billion']
+    location : ../data_bank/exchange_rate.csv
+  logging:
+    location : ../data_bank/log_file.txt
+  output:
+    location : ../output/largest_banks_data.csv
 
 settings:
   python_version: "3.8+"
