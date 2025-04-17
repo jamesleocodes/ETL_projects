@@ -54,10 +54,10 @@ def log_progress(message):
 # extract function
 def extract(source_url):
     """Extracts bank data from a webpage based on the provided URL.
-    
+
     Args:
         source_url (str): URL of the webpage containing bank data
-        
+
     Returns:
         pandas.DataFrame: DataFrame containing extracted bank data
     """
@@ -93,11 +93,11 @@ def extract(source_url):
 # transform function
 def transform(df_data, exchange_rate_file):
     """Transforms bank data by adding columns for market capitalization in different currencies.
-    
+
     Args:
         df_data (pandas.DataFrame): DataFrame containing bank data
         exchange_rate_file (str): Path to CSV file with currency exchange rates
-        
+
     Returns:
         pandas.DataFrame: Transformed DataFrame with additional currency columns
     """
@@ -127,7 +127,7 @@ def transform(df_data, exchange_rate_file):
 # load to csv function
 def load_to_csv(df_data, out_path):
     """Saves the transformed dataframe to a CSV file.
-    
+
     Args:
         df_data (pandas.DataFrame): The dataframe to save
         out_path (str): Path where the CSV file will be saved
@@ -162,6 +162,7 @@ if not inspector.has_table(table_name):
         );
         """
         connection.execute(create_table_query)
+
 
 def load_to_db(df_data, db_table_name):
     """This function saves the final dataframe as a database table

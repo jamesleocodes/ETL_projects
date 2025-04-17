@@ -1,6 +1,6 @@
 """ETL process for extracting GDP data from web sources.
 
-This module extracts GDP data from a specified website, transforms it by converting 
+This module extracts GDP data from a specified website, transforms it by converting
 GDP values from millions to billions USD, and loads the results to a CSV file and database.
 """
 
@@ -62,7 +62,9 @@ def transform(data_frame):
     format to float value, transforms the information of GDP from
     USD (Millions) to USD (Billions) rounding to 2 decimal places.
     The function returns the transformed dataframe."""
-    gdp_list = data_frame["GDP_USD_millions"].tolist()  # Convert the GDP column to a list
+    gdp_list = data_frame[
+        "GDP_USD_millions"
+    ].tolist()  # Convert the GDP column to a list
     # Handle special characters like '—' and convert to float
     gdp_list = [float("".join(x.split(","))) if x != "—" else 0.0 for x in gdp_list]
     gdp_list = [np.round(x / 1000, 2) for x in gdp_list]
@@ -112,7 +114,9 @@ def load_to_db(data_frame, db_table_name):
     db_engine = sqlalchemy.create_engine(
         f"mysql+mysqlconnector://root:chosandarhtet@localhost:3306/{db_name}"
     )
-    data_frame.to_sql(name=db_table_name, con=db_engine, if_exists="replace", index=False)
+    data_frame.to_sql(
+        name=db_table_name, con=db_engine, if_exists="replace", index=False
+    )
     print("Data has been successfully inserted into the database.")
 
 
@@ -125,7 +129,7 @@ def run_query(sql_stmt, sql_conn):
 
 
 def log_progress(message):
-    """This function logs the mentioned message at a given stage of the code execution 
+    """This function logs the mentioned message at a given stage of the code execution
     to a log file. Function returns nothing"""
 
     timestamp_format = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

@@ -58,17 +58,18 @@ def extract_from_xml(file_to_process):
     # Create DataFrame
     dataframe = pd.DataFrame(data)
     if not dataframe.empty:
-        dataframe = dataframe.astype({"name": "object", "height": "float64", "weight": "float64"})
+        dataframe = dataframe.astype(
+            {"name": "object", "height": "float64", "weight": "float64"}
+        )
     return dataframe
-
 
 
 # write a function to call the respective function based on the file type
 def extract():
     """Extract data from CSV, JSON, and XML files in the data folder.
-    
+
     Returns:
-        pandas.DataFrame: Combined data from all processed files with name, 
+        pandas.DataFrame: Combined data from all processed files with name,
                          height, and weight columns
     """
     data_frame = pd.DataFrame(columns=["name", "height", "weight"])
@@ -110,12 +111,13 @@ def transform(data):
 # Load the data into a target file
 def load_data(output_path, data_frame):
     """Load the data into a target file
-    
+
     Args:
         output_path (str): Path to the output CSV file
         data_frame (pandas.DataFrame): Transformed data to be saved
     """
     data_frame.to_csv(output_path, index=False)
+
 
 # Log the initialization of the ETL process
 log_progress("ETL Job Started", log_file)

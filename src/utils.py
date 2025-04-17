@@ -6,7 +6,7 @@ from datetime import datetime
 
 def log_progress(message, log_file):
     """Log the message with timestamp to the specified log file.
-    
+
     Args:
         message (str): Message to log
         log_file (str): Path to the log file

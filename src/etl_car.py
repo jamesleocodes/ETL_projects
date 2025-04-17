@@ -75,7 +75,7 @@ def extract_from_xml(file_to_process):
 # Function to handle extraction based on file type
 def extract():
     """Extract data from CSV, JSON, and XML files in the data folder.
-    
+
     Returns:
         pandas.DataFrame: Combined data from all processed files
     """
@@ -113,7 +113,7 @@ def transform(data):
 # Load the data into a target file
 def load_data(out_path, data_frame):
     """Load the data into a target file
-    
+
     Args:
         out_path (str): Path to the output file
         data_frame (pandas.DataFrame): Data to be saved
