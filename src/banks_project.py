@@ -8,13 +8,6 @@ import yaml
 import sqlalchemy
 from sqlalchemy import inspect
 
-def overview():
-    """This ETL project extracts data about the largest banks by market capitalization from a web source. 
-    The data is transformed by converting market cap values from USD to other currencies like GBP, EUR, and INR. 
-    Transformed data is loaded into both a CSV file and a MySQL database for storage and analysis. 
-    The project includes logging capabilities to track progress throughout the ETL pipeline."""
-    pass
-
 with open("../config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
@@ -26,7 +19,7 @@ csv_file = config["etl_bank"]["source"]["location"]
 code_log_file = config["etl_bank"]["logging"]["location"]
 output_file = config["etl_bank"]["output"]["location"]
 
-# Write a function log_progress() to log
+# A function log_progress() to log
 # the progress of the code at different stages
 # in a file code_log.txt. Use the list of log points
 #  provided to create log entries as every stage of the code.
