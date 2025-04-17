@@ -1,0 +1,20 @@
+2025-Apr-18-03:06:37 - ETL Job Started
+2025-Apr-18-03:06:37 - Extract phase Started
+2025-Apr-18-03:06:44 - Extract phase Ended
+2025-Apr-18-03:06:44 - Transform phase Started
+2025-Apr-18-03:06:44 - Transform phase Ended
+2025-Apr-18-03:06:44 - Load phase Started
+2025-Apr-18-03:06:44 - Data saved to CSV file: ../data_scrapeMovies/top_50_films.csv
+2025-Apr-18-03:06:44 - Database operation failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-Apr-18-03:06:44 - Load phase Ended
+2025-Apr-18-03:06:44 - ETL Job Ended
+2025-Apr-18-03:07:04 - ETL Job Started
+2025-Apr-18-03:07:04 - Extract phase Started
+2025-Apr-18-03:07:05 - Extract phase Ended
+2025-Apr-18-03:07:05 - Transform phase Started
+2025-Apr-18-03:07:05 - Transform phase Ended
+2025-Apr-18-03:07:05 - Load phase Started
+2025-Apr-18-03:07:05 - Data saved to CSV file: ../data_scrapeMovies/top_50_films.csv
+2025-Apr-18-03:07:05 - Database operation failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-Apr-18-03:07:05 - Load phase Ended
+2025-Apr-18-03:07:05 - ETL Job Ended

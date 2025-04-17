@@ -6,6 +6,7 @@ and loads the results to a CSV file and a MySQL database.
 
 import requests
 from bs4 import BeautifulSoup
+from utils import log_progress
 import pandas as pd
 import yaml
 import mysql.connector

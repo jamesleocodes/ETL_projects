@@ -8,7 +8,7 @@ and loads the results to a target CSV file. The process is logged.
 import glob
 import xml.etree.ElementTree as ET
 from datetime import datetime
-
+from utils import log_progress
 import pandas as pd
 import yaml
 
@@ -121,45 +121,31 @@ def load_data(out_path, data_frame):
     data_frame.to_csv(out_path, index=False)
 
 
-# Log the process
-def log_progress(message):
-    """Log the process
-    
-    Args:
-        message (str): Message to log
-    """
-    timestamp_format = "%Y-%h-%d-%H:%M:%S"  # Year-Monthname-Day-Hour-Minute-Second
-    now = datetime.now()
-    timestamp = now.strftime(timestamp_format)
-    with open(log_file, "a", encoding="utf-8") as f:
-        f.write(f"{timestamp} - {message}\n")
-
-
 # Log the initialization of the ETL process
-log_progress("ETL Job Started")
+log_progress("ETL Job Started", log_file)
 
 # Log the beginning of the Extraction process
-log_progress("Extract phase Started")
+log_progress("Extract phase Started", log_file)
 extracted_data = extract()
 
 # Log the completion of the Extraction process
-log_progress("Extract phase Ended")
+log_progress("Extract phase Ended", log_file)
 
 # Log the beginning of the Transformation process
-log_progress("Transform phase Started")
+log_progress("Transform phase Started", log_file)
 transformed_data = transform(extracted_data)
 print("Transformed Data")
 print(transformed_data)
 
 # Log the completion of the Transformation process
-log_progress("Transform phase Ended")
+log_progress("Transform phase Ended", log_file)
 
 # Log the beginning of the Loading process
-log_progress("Load phase Started")
+log_progress("Load phase Started", log_file)
 load_data(out_path=target_file, data_frame=transformed_data)
 
 # Log the completion of the Loading process
-log_progress("Load phase Ended")
+log_progress("Load phase Ended", log_file)
 
 # Log the completion of the ETL process
-log_progress("ETL Job Ended")
+log_progress("ETL Job Ended", log_file)
