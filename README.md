@@ -1,8 +1,9 @@
 ## Repository Stats
 
-- **Commits:** ![GitHub commit count](https://img.shields.io/github/commit-activity/m/USERNAME/REPOSITORY)
+- **Commits:** ![GitHub commit count](https://img.shields.io/github/commit-activity/m/jamesleocodes/ETL_projects)
+- **Clones:** ![Clone Count](https://your-custom-endpoint.vercel.app/clones/jamesleocodes/ETL_projects)
 - **Clones:** (Data not directly available but can be added manually using external scripts)
-- **Visitors:** ![Visitor Count](https://visitor-badge.glitch.me/badge?page_id=USERNAME.REPOSITORY)
+- **Visitors:** ![Visitor Count](https://visitor-badge.glitch.me/badge?page_id=jamesleocodes.ETL_projects)
 
 
 
