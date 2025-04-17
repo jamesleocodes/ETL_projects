@@ -1,6 +1,7 @@
+from datetime import datetime
 import requests
 import numpy as np
-from datetime import datetime
+
 import mysql.connector
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -8,7 +9,7 @@ import yaml
 import sqlalchemy
 from sqlalchemy import inspect
 
-with open("../config.yaml", "r") as file:
+with open("../config.yaml", "r", encoding="utf-8") as file:
     config = yaml.safe_load(file)
 
 url = config["etl_bank"]["source"]["url"]
@@ -32,7 +33,7 @@ def log_progress(message):
     timestamp_format = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     now = datetime.now()
     timestamp = now.strftime(timestamp_format)
-    with open(code_log_file, "a") as f:
+    with open(code_log_file, "a", encoding="utf-8") as f:
         f.write(timestamp + " : " + message + "\n")
     print(timestamp + " : " + message)
 
@@ -45,7 +46,15 @@ def log_progress(message):
 # b. Write the code for a function extract() to perform the required data extraction.
 # c. Execute a function call to extract() to verify the output.
 # extract function
-def extract(url, table_attrs):
+def extract(url):
+    """Extracts bank data from a webpage based on the provided URL.
+    
+    Args:
+        url (str): URL of the webpage containing bank data
+        
+    Returns:
+        pandas.DataFrame: DataFrame containing extracted bank data
+    """
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
 
@@ -77,6 +86,15 @@ def extract(url, table_attrs):
 
 # transform function
 def transform(dataframe, csv_file):
+    """Transforms bank data by adding columns for market capitalization in different currencies.
+    
+    Args:
+        dataframe (pandas.DataFrame): DataFrame containing bank data
+        csv_file (str): Path to CSV file with currency exchange rates
+        
+    Returns:
+        pandas.DataFrame: Transformed DataFrame with additional currency columns
+    """
     # Load exchange rates from CSV and convert to a dictionary
     exchange_rates = pd.read_csv(csv_file)
     rate_dict = dict(zip(exchange_rates["Currency"], exchange_rates["Rate"]))
@@ -134,7 +152,7 @@ if not inspector.has_table(table_name):
         connection.execute(create_table_query)
 
 
-def load_to_db(df, sql_connection, table_name):
+def load_to_db(df, table_name):
     """This function saves the final dataframe as a database table
     with the provided name. Function returns nothing."""
     # Create an SQLAlchemy engine for MySQL
@@ -161,7 +179,7 @@ portion is not inside any function."""
 
 log_progress("Preliminaries complete. Initiating ETL process")
 
-df = extract(url, table_attribs)
+df = extract(url)
 print(df)
 
 log_progress("Data extraction complete. Initiating Transformation process")
@@ -184,7 +202,7 @@ sql_connection = mysql.connector.connect(
 )
 print("Connected to MySQL database")
 
-load_to_db(df, sql_connection, table_name)
+load_to_db(df, table_name)
 
 log_progress("Data loaded to Database as table. Running the query")
 
