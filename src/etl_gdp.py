@@ -1,15 +1,22 @@
-import requests
-import mysql.connector
-import pandas as pd
-from bs4 import BeautifulSoup
+"""ETL process for extracting GDP data from web sources.
+
+This module extracts GDP data from a specified website, transforms it by converting 
+GDP values from millions to billions USD, and loads the results to a CSV file and database.
+"""
+
 from datetime import datetime
+
+import numpy as np
+import pandas as pd
+import requests
 import yaml
+from bs4 import BeautifulSoup
+import mysql.connector
 import sqlalchemy
 from sqlalchemy import inspect
-import numpy as np
 
 # Load configuration from config.yaml
-with open("../config.yaml", "r") as stream:
+with open("../config.yaml", "r", encoding="utf-8") as stream:
     config = yaml.safe_load(stream)
 
 # Get paths dynamically from config.yaml
@@ -23,15 +30,15 @@ log_file = config["etl_gdp"]["logging"]["location"]
 # df = pd.DataFrame(columns=["Country", "GDP (US$)", "Population", "Area (km²)"])
 
 
-def extract(url, table_attribs):
+def extract(source_url, attrs):
     """This function extracts the required
     information from the website and saves it to a dataframe. The
     function returns the dataframe for further processing."""
 
-    page = requests.get(url)  # Fetch the webpage
+    page = requests.get(source_url, timeout=10)  # Fetch the webpage
     data = BeautifulSoup(page.text, "html.parser")  # Parse the webpage
-    df = pd.DataFrame(
-        columns=table_attribs
+    result_df = pd.DataFrame(
+        columns=attrs
     )  # Create an empty dataframe with the required columns
     # Locate the table based on the table_attribs
     tables = data.find_all("tbody")
@@ -46,28 +53,28 @@ def extract(url, table_attribs):
                     "GDP_USD_millions": col[2].contents[0],
                 }
                 df1 = pd.DataFrame(data_dict, index=[0])
-                df = pd.concat([df, df1], ignore_index=True)
-    return df
+                result_df = pd.concat([result_df, df1], ignore_index=True)
+    return result_df
 
 
-def transform(df):
+def transform(data_frame):
     """This function converts the GDP information from Currency
     format to float value, transforms the information of GDP from
     USD (Millions) to USD (Billions) rounding to 2 decimal places.
     The function returns the transformed dataframe."""
-    GDP_list = df["GDP_USD_millions"].tolist()  # Convert the GDP column to a list
+    gdp_list = data_frame["GDP_USD_millions"].tolist()  # Convert the GDP column to a list
     # Handle special characters like '—' and convert to float
-    GDP_list = [float("".join(x.split(","))) if x != "—" else 0.0 for x in GDP_list]
-    GDP_list = [np.round(x / 1000, 2) for x in GDP_list]
-    df["GDP_USD_millions"] = GDP_list
-    df = df.rename(columns={"GDP_USD_millions": "GDP_USD_billions"})
-    return df
+    gdp_list = [float("".join(x.split(","))) if x != "—" else 0.0 for x in gdp_list]
+    gdp_list = [np.round(x / 1000, 2) for x in gdp_list]
+    data_frame["GDP_USD_millions"] = gdp_list
+    data_frame = data_frame.rename(columns={"GDP_USD_millions": "GDP_USD_billions"})
+    return data_frame
 
 
-def load_to_csv(df, csv_path):
+def load_to_csv(data_frame, output_path):
     """This function saves the final dataframe as a `CSV` file
     in the provided path. Function returns nothing."""
-    df.to_csv(csv_path, index=False)
+    data_frame.to_csv(output_path, index=False)
 
 
 sql_connection = mysql.connector.connect(
@@ -97,47 +104,48 @@ if not inspector.has_table(table_name):
         connection.execute(create_table_query)
 
 
-def load_to_db(df, sql_connection, table_name):
+def load_to_db(data_frame, db_table_name):
     """This function saves the final dataframe as a database table
     with the provided name. Function returns nothing."""
     # Create an SQLAlchemy engine for MySQL
-    engine = sqlalchemy.create_engine(
+    db_engine = sqlalchemy.create_engine(
         f"mysql+mysqlconnector://root:password@localhost:3306/{db_name}"
     )
-    df.to_sql(name=table_name, con=engine, if_exists="replace", index=False)
+    data_frame.to_sql(name=db_table_name, con=db_engine, if_exists="replace", index=False)
     print("Data has been successfully inserted into the database.")
     # Don't close the connection here
 
 
-def run_query(query_statement, connection):
+def run_query(sql_stmt, sql_conn):
     """This function runs the stated query on the database table and
     prints the output on the terminal. Function returns nothing."""
-    print(query_statement)
-    query_output = pd.read_sql(query_statement, connection)
+    print(sql_stmt)
+    query_output = pd.read_sql(sql_stmt, sql_conn)
     print(query_output)
 
 
 def log_progress(message):
-    """This function logs the mentioned message at a given stage of the code execution to a log file. Function returns nothing"""
+    """This function logs the mentioned message at a given stage of the code execution 
+    to a log file. Function returns nothing"""
 
     timestamp_format = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     now = datetime.now()
     timestamp = now.strftime(timestamp_format)
-    with open(log_file, "a") as f:
+    with open(log_file, "a", encoding="utf-8") as f:
         f.write(timestamp + " : " + message + "\n")
 
 
 log_progress("Preliminaries complete. Initiating ETL process")
 
-df = extract(url, table_attribs)
+df = extract(source_url=url, attrs=table_attribs)
 
 log_progress("Data extraction complete. Initiating Transformation process")
 
-df = transform(df)
+df = transform(data_frame=df)
 
 log_progress("Data transformation complete. Initiating loading process")
 
-load_to_csv(df, csv_path)
+load_to_csv(data_frame=df, output_path=csv_path)
 
 log_progress("Data saved to CSV file")
 
@@ -152,18 +160,18 @@ sql_connection = mysql.connector.connect(
 
 log_progress("SQL Connection initiated.")
 
-load_to_db(df, sql_connection, table_name)
+load_to_db(data_frame=df, db_table_name=table_name)
 
 log_progress("Data loaded to Database as table. Running the query")
 
 # Create a new connection for querying or use SQLAlchemy
-engine = sqlalchemy.create_engine(
+query_engine = sqlalchemy.create_engine(
     f"mysql+mysqlconnector://root:password@localhost:3306/{db_name}"
 )
-query_statement = f"SELECT * from {table_name} WHERE GDP_USD_billions >= 100"
+sql_query = f"SELECT * from {table_name} WHERE GDP_USD_billions >= 100"
 # Use the engine.connect() for the query
-with engine.connect() as connection:
-    run_query(query_statement, connection)
+with query_engine.connect() as conn:
+    run_query(sql_stmt=sql_query, sql_conn=conn)
 
 log_progress("Process Complete.")
 

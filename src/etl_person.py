@@ -1,13 +1,19 @@
+"""ETL process for processing person data from different file formats.
+
+This module extracts person data from CSV, JSON, and XML files, transforms height and weight
+data from imperial to metric units, and loads the results to a target CSV file.
+"""
+
 # Load the necessary libraries
 import glob
-import pandas as pd
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
+import pandas as pd
 import yaml  # Import PyYAML for reading config files
 
 # Load configuration from config.yaml
-with open("../config.yaml", "r") as stream:
+with open("../config.yaml", "r", encoding="utf-8") as stream:
     config = yaml.safe_load(stream)
 
 # Get paths dynamically from config.yaml
@@ -58,51 +64,70 @@ def extract_from_xml(file_to_process):
 
 # write a function to call the respective function based on the file type
 def extract():
-    extracted_data = pd.DataFrame(columns=["name", "height", "weight"])
+    """Extract data from CSV, JSON, and XML files in the data folder.
+    
+    Returns:
+        pandas.DataFrame: Combined data from all processed files with name, 
+                         height, and weight columns
+    """
+    data_frame = pd.DataFrame(columns=["name", "height", "weight"])
 
     # process all csv files in the data folder, except the target file
     for csvfile in glob.glob(f"{data_folder}/*.csv"):
         if csvfile != target_file:
-            extracted_data = pd.concat(
-                [extracted_data, extract_from_csv(csvfile)], ignore_index=True
+            data_frame = pd.concat(
+                [data_frame, extract_from_csv(csvfile)], ignore_index=True
             )
 
     # process all json files in the data folder
     for jsonfile in glob.glob(f"{data_folder}/*.json"):
-        extracted_data = pd.concat(
-            [extracted_data, extract_from_json(jsonfile)], ignore_index=True
+        data_frame = pd.concat(
+            [data_frame, extract_from_json(jsonfile)], ignore_index=True
         )
 
     # process all xml files in the data folder
     for xmlfile in glob.glob(f"{data_folder}/*.xml"):
-        extracted_data = pd.concat(
-            [extracted_data, extract_from_xml(xmlfile)], ignore_index=True
+        data_frame = pd.concat(
+            [data_frame, extract_from_xml(xmlfile)], ignore_index=True
         )
 
-    return extracted_data
+    return data_frame
 
 
 # Transform the data
 def transform(data):
-    """Convert inches to meters and round off to two decimals 1 inch = 0.0254 meters"""
+    """Convert inches to meters and round off to two decimals 1 inch = 0.0254 meters
+    Convert pounds to kilograms and round off to two decimals 1 pound = 0.453592 kg
+    """
+    # Convert height from inches to meters
     data["height"] = (data["height"].astype(float) * 0.0254).round(2)
+    # Convert weight from pounds to kilograms
     data["weight"] = (data["weight"].astype(float) * 0.453592).round(2)
     return data
 
 
 # Load the data into a target file
-def load_data(target_file, transformed_data):
-    """Load the data into a target file"""
-    transformed_data.to_csv(target_file, index=False)
+def load_data(output_path, data_frame):
+    """Load the data into a target file
+    
+    Args:
+        output_path (str): Path to the output CSV file
+        data_frame (pandas.DataFrame): Transformed data to be saved
+    """
+    data_frame.to_csv(output_path, index=False)
 
 
 # Log the process
 def log_progress(message):
-    """Log the process"""
+    """Log the process
+    
+    Args:
+        message (str): Message to log with timestamp
+    """
     timestamp_format = "%Y-%h-%d-%H:%M:%S"  # Year-Monthname-Day-Hour-Minute-Second
     now = datetime.now()
     timestamp = now.strftime(timestamp_format)
-    with open(log_file, "a") as f:
+    with open(log_file, "a", encoding="utf-8") as f:
         f.write(f"{timestamp} - {message}\n")
 
 
@@ -127,7 +152,7 @@ log_progress("Transform phase Ended")
 
 # Log the beginning of the Loading process
 log_progress("Load phase Started")
-load_data(target_file, transformed_data)
+load_data(output_path=target_file, data_frame=transformed_data)
 
 # Log the completion of the Loading process
 log_progress("Load phase Ended")
