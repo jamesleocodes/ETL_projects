@@ -46,20 +46,21 @@ def extract_from_xml(file_to_process):
     for person in root:
         try:
             name = person.find("name").text
-            height = int(person.find("height").text)  # Convert to int
-            weight = int(person.find("weight").text)  # Convert to int
+            height = float(person.find("height").text)  # Convert to float
+            weight = float(person.find("weight").text)  # Convert to float
             data.append({"name": name, "height": height, "weight": weight})
-        except (ValueError, AttributeError) as e:
-            print(f"Skipping invalid row: {e}")
+        except ValueError as ve:
+            print(f"Skipping invalid row: {ve}")
+            continue
+        except AttributeError as ae:
+            print(f"Skipping invalid row: Missing element - {ae}")
             continue
     # Create DataFrame
     dataframe = pd.DataFrame(data)
-    # Enforce dtypes if DataFrame is not empty
     if not dataframe.empty:
-        dataframe = dataframe.astype(
-            {"name": "object", "height": "int64", "weight": "int64"}
-        )
+        dataframe = dataframe.astype({"name": "object", "height": "float64", "weight": "float64"})
     return dataframe
+
 
 
 # write a function to call the respective function based on the file type

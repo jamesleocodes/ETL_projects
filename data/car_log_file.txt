@@ -1,2 +1,0 @@
-2025-Apr-15-15:01:08 - ETL Job Started
-2025-Apr-15-15:01:08 - Extract phase Started

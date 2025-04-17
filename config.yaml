@@ -12,9 +12,9 @@ etl_person:
       precision: 2
   target:
     type: file
-    location: ../data/transformed_data.csv
+    location: ../output/transformed_data_person.csv
   logging:
-    location: ../data/log_file.txt
+    location: ../output/log_file_person.txt
 
 etl_car:
   source:
@@ -26,9 +26,9 @@ etl_car:
       precision: 2
   target:
     type: file
-    location: ../data_car/transformed_data.csv
+    location: ../output/transformed_data_car.csv
   logging:
-    location: ../data_car/log_file.txt
+    location: ../output/log_file_car.txt
 
 etl_webscrape_movies:
   source:
@@ -47,7 +47,7 @@ etl_gdp:
     table_attribs: ['Country', 'GDP_USD_billions']
     location: ../data_gdp/countries_by_gdp.csv
   logging:
-    location: ../data_gdp/log_file.txt
+    location: ../output/log_file_gdp.txt
 etl_bank:
   source:
     type: web
@@ -57,7 +57,7 @@ etl_bank:
     table_attribs : ['Name', 'MC_USD_Billion']
     location : ../data_bank/exchange_rate.csv
   logging:
-    location : ../data_bank/log_file.txt
+    location : ../output/log_file_bank.txt
   output:
     location : ../output/largest_banks_data.csv
 

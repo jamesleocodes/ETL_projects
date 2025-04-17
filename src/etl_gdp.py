@@ -82,14 +82,14 @@ sql_connection = mysql.connector.connect(
     host="localhost",
     database=db_name,
     user="root",
-    password="password",
+    password="chosandarhtet",
     port="3306",
 )
 print("Connected to MySQL database")
 
 # Create a SQLAlchemy engine
 engine = sqlalchemy.create_engine(
-    f"mysql+mysqlconnector://root:password@localhost:3306/{db_name}"
+    f"mysql+mysqlconnector://root:chosandarhtet@localhost:3306/{db_name}"
 )
 
 # Check if the table exists and create it if needed
@@ -110,7 +110,7 @@ def load_to_db(data_frame, db_table_name):
     with the provided name. Function returns nothing."""
     # Create an SQLAlchemy engine for MySQL
     db_engine = sqlalchemy.create_engine(
-        f"mysql+mysqlconnector://root:password@localhost:3306/{db_name}"
+        f"mysql+mysqlconnector://root:chosandarhtet@localhost:3306/{db_name}"
     )
     data_frame.to_sql(name=db_table_name, con=db_engine, if_exists="replace", index=False)
     print("Data has been successfully inserted into the database.")
@@ -158,7 +158,7 @@ log_progress("Data loaded to Database as table. Running the query")
 
 # Create a new connection for querying or use SQLAlchemy
 query_engine = sqlalchemy.create_engine(
-    f"mysql+mysqlconnector://root:password@localhost:3306/{db_name}"
+    f"mysql+mysqlconnector://root:chosandarhtet@localhost:3306/{db_name}"
 )
 sql_query = f"SELECT * from {table_name} WHERE GDP_USD_billions >= 100"
 # Use the engine.connect() for the query
