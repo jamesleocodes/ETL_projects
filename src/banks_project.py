@@ -8,6 +8,13 @@ import yaml
 import sqlalchemy
 from sqlalchemy import inspect
 
+def overview():
+    """This ETL project extracts data about the largest banks by market capitalization from a web source. 
+    The data is transformed by converting market cap values from USD to other currencies like GBP, EUR, and INR. 
+    Transformed data is loaded into both a CSV file and a MySQL database for storage and analysis. 
+    The project includes logging capabilities to track progress throughout the ETL pipeline."""
+    pass
+
 with open("../config.yaml", "r") as file:
     config = yaml.safe_load(file)
 

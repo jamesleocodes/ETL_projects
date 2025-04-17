@@ -94,6 +94,20 @@ This project processes movie-related data by scraping information from a webpage
   - Inserts the data into a MySQL database table.
 - **Configuration**: Dynamically loads configurations (e.g., URL, database name, table name, and file paths) from a `config.yaml` file.
 
+### Bank : ETL for bank data (`banks_project.py`)
+
+#### Overview
+This bank project extracts data about the largest banks by market capitalization from a web source. The data is transformed by converting market cap values from USD to other currencies like GBP, EUR, and INR. Transformed data is loaded into both a CSV file and a MySQL database for storage and analysis. The project includes logging capabilities to track progress throughout the ETL pipeline.
+
+#### Features
+- **Extraction**: Scrapes bank data from Wikipedia using `BeautifulSoup` and `pandas`.
+- **Transformation**: Converts market cap values from USD to GBP, EUR, and INR currencies.
+- **Loading**: 
+  - Saves the transformed data into a CSV file.
+  - Inserts the data into a MySQL database table.
+- **Logging**: Tracks progress at each stage of the ETL process.
+- **Configuration**: Dynamically loads configurations (URL, database credentials, table names, and file paths) from a `config.yaml` file.
+
 #### How to Run
 1. Ensure the `config.yaml` file is correctly configured with the following keys:
    ```yaml
