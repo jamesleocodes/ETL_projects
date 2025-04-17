@@ -2,7 +2,8 @@
 
 """
 This is the __init__.py file for the scripts package.
-It initializes the package and provides access to ETL functions for person data, car data, and movie data.
+It initializes the package and provides access to ETL functions for person data,
+car data, and movie data.
 """
 
 # # Import the ETL scripts
