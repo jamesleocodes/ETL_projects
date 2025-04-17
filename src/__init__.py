@@ -10,3 +10,5 @@ car data, and movie data.
 # from .etl_person import extract_from_csv, transform
 # from .etl_car import extract_from_csv, extract_from_json, extract_from_xml, transform, load_data
 # from .etl_webscrape_movies import extract_movies, transform_movies
+
+"""Package initialization for ETL scripts."""

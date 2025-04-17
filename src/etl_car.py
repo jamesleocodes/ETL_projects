@@ -4,13 +4,21 @@ This module extracts car data from CSV, JSON, and XML files, transforms the pric
 and loads the results to a target CSV file. The process is logged.
 """
 
-# Load the necessary libraries
+# Standard library imports
 import glob
+import os
+import sys
 import xml.etree.ElementTree as ET
-from datetime import datetime
-from utils import log_progress
+
+# Third-party library imports
 import pandas as pd
 import yaml
+
+# Add the 'src' directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+# Local imports
+from src.utils import log_progress
 
 # Load configuration from config.yaml
 with open("../config.yaml", "r", encoding="utf-8") as stream:

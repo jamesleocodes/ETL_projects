@@ -30,3 +30,11 @@
 2025-Apr-18-03:08:55 - Load phase Started
 2025-Apr-18-03:08:55 - Load phase Ended
 2025-Apr-18-03:08:55 - ETL Job Ended
+2025-Apr-18-03:18:10 - ETL Job Started
+2025-Apr-18-03:18:10 - Extract phase Started
+2025-Apr-18-03:18:10 - Extract phase Ended
+2025-Apr-18-03:18:10 - Transform phase Started
+2025-Apr-18-03:18:10 - Transform phase Ended
+2025-Apr-18-03:18:10 - Load phase Started
+2025-Apr-18-03:18:10 - Load phase Ended
+2025-Apr-18-03:18:10 - ETL Job Ended

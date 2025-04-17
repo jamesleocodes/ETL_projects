@@ -1,0 +1,15 @@
+[MASTER]
+# Specify the path to search for modules
+init-hook='import sys; sys.path.append("src")'
+
+[FORMAT]
+# Maximum line length
+max-line-length=100
+
+[MESSAGES CONTROL]
+# Disable some unwanted warnings
+disable=
+    C0103, # Invalid name (too short, does not match pattern, etc.)
+    C0111, # Missing docstring
+    R0903, # Too few public methods 
+    C0413 # Import not at top of file
