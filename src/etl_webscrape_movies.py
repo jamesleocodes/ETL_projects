@@ -5,10 +5,10 @@ and loads the results to a CSV file and a MySQL database.
 """
 
 import requests
-import mysql.connector
-import pandas as pd
 from bs4 import BeautifulSoup
+import pandas as pd
 import yaml
+import mysql.connector
 import sqlalchemy
 from sqlalchemy import inspect
 
@@ -51,7 +51,7 @@ for row in rows:
 print(df)
 df.to_csv(CSV_PATH, index=False)
 
-
+# Connect to MySQL
 conn = mysql.connector.connect(
     host="localhost",
     database=DB_NAME,
@@ -70,13 +70,12 @@ engine = sqlalchemy.create_engine(
 inspector = inspect(engine)
 if not inspector.has_table(TABLE_NAME):
     with engine.connect() as connection:
-        create_table_query = f"""
-        CREATE TABLE {TABLE_NAME} (
-          `Average Rank` VARCHAR(255),
-          `Film` VARCHAR(255),
-          `Year` VARCHAR(255)
-        );
-        """
+        COLUMNS_DEF = (
+            "`Average Rank` VARCHAR(255), "
+            "`Film` VARCHAR(255), "
+            "`Year` VARCHAR(255)"
+        )
+        create_table_query = f"CREATE TABLE {TABLE_NAME} ({COLUMNS_DEF});"
         connection.execute(create_table_query)
 
 # Write the DataFrame to the table

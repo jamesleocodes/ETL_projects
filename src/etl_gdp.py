@@ -6,13 +6,13 @@ GDP values from millions to billions USD, and loads the results to a CSV file an
 
 from datetime import datetime
 
+import mysql.connector
 import numpy as np
 import pandas as pd
 import requests
+import sqlalchemy
 import yaml
 from bs4 import BeautifulSoup
-import mysql.connector
-import sqlalchemy
 from sqlalchemy import inspect
 
 # Load configuration from config.yaml
@@ -77,6 +77,7 @@ def load_to_csv(data_frame, output_path):
     data_frame.to_csv(output_path, index=False)
 
 
+# Connect to MySQL database
 sql_connection = mysql.connector.connect(
     host="localhost",
     database=db_name,
@@ -88,17 +89,17 @@ print("Connected to MySQL database")
 
 # Create a SQLAlchemy engine
 engine = sqlalchemy.create_engine(
-    "mysql+mysqlconnector://root:password@localhost:3306/world_economies"
+    f"mysql+mysqlconnector://root:password@localhost:3306/{db_name}"
 )
 
-# Check if the table exists, and create it if it doesn't
+# Check if the table exists and create it if needed
 inspector = inspect(engine)
 if not inspector.has_table(table_name):
     with engine.connect() as connection:
+        TABLE_COLUMNS = "`Country` VARCHAR(255), `GDP_USD_billions` VARCHAR(255)"
         create_table_query = f"""
         CREATE TABLE {table_name} (
-            `Country` VARCHAR(255),
-            `GDP_USD_billions` VARCHAR(255)
+            {TABLE_COLUMNS}
         );
         """
         connection.execute(create_table_query)
@@ -113,7 +114,6 @@ def load_to_db(data_frame, db_table_name):
     )
     data_frame.to_sql(name=db_table_name, con=db_engine, if_exists="replace", index=False)
     print("Data has been successfully inserted into the database.")
-    # Don't close the connection here
 
 
 def run_query(sql_stmt, sql_conn):
@@ -149,17 +149,9 @@ load_to_csv(data_frame=df, output_path=csv_path)
 
 log_progress("Data saved to CSV file")
 
-# Keep the MySQL connection
-sql_connection = mysql.connector.connect(
-    host="localhost",
-    database=db_name,
-    user="root",
-    password="password",
-    port="3306",
-)
-
 log_progress("SQL Connection initiated.")
 
+# MySQL connection already established in the connect_to_mysql call
 load_to_db(data_frame=df, db_table_name=table_name)
 
 log_progress("Data loaded to Database as table. Running the query")

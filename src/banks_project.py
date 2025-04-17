@@ -155,14 +155,13 @@ engine = sqlalchemy.create_engine(
 inspector = inspect(engine)
 if not inspector.has_table(table_name):
     with engine.connect() as connection:
+        TABLE_COLUMNS = "`Name` VARCHAR(255), `MC_USD_Billion` VARCHAR(255)"
         create_table_query = f"""
         CREATE TABLE {table_name} (
-            `Name` VARCHAR(255),
-            `MC_USD_Billion` VARCHAR(255)
+            {TABLE_COLUMNS}
         );
         """
         connection.execute(create_table_query)
-
 
 def load_to_db(df_data, db_table_name):
     """This function saves the final dataframe as a database table
@@ -201,16 +200,6 @@ log_progress("Data transformation complete. Initiating loading process")
 load_to_csv(df_data=df, out_path=output_file)
 
 log_progress("Data saved to CSV file")
-
-# Keep the MySQL connection
-sql_connection = mysql.connector.connect(
-    host="localhost",
-    database=db_name,
-    user="root",
-    password="password",
-    port="3306",
-)
-print("Connected to MySQL database")
 
 load_to_db(df_data=df, db_table_name=table_name)
 
