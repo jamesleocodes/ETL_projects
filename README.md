@@ -120,6 +120,7 @@ This bank project extracts data about the largest banks by market capitalization
       location: ../data_scrapeMovies/top_50_films.csv
    ```
 2. Run the script:
+  Navigate to the src folder and run the desired project(python file) by entering the following command in the terminal:
    ```bash
    python3 etl_webscrape_movies.py
    ```
