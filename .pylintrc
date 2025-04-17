@@ -12,8 +12,8 @@ disable=
     C0103, # Invalid name (too short, does not match pattern, etc.)
     C0111, # Missing docstring
     R0903, # Too few public methods 
-    C0413 # Import not at top of file
-    W0105 
-    W0621
-    C0411
-    R0801
+    C0413, # Import not at top of file
+    W0105, # String statement has no effect
+    W0621, # Redefined outer name 'log_file' from line 1
+    C0411, # First argument of 'with' must be a context manager
+    R0801, # Similar lines in if/else branches
