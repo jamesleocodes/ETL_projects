@@ -1,16 +1,3 @@
-## Repository Stats
-
-- **Commits:** ![GitHub commit count](https://img.shields.io/github/commit-activity/m/jamesleocodes/ETL_projects)
-- **Clones:** ![Clone Count](https://your-custom-endpoint.vercel.app/clones/jamesleocodes/ETL_projects)
-- **Clones:** (Data not directly available but can be added manually using external scripts)
-
-
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=USERNAME&show_icons=true&theme=default)](https://github.com/jamesleocodes/ETL_projects)
-
-
-
-
-
 # ETL Project
 
 This project is a basic implementation of an ETL (Extract, Transform, Load) pipeline. It demonstrates how to extract data from a source, transform it to meet specific requirements, and load it into a target destination.
