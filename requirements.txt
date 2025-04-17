@@ -4,3 +4,4 @@ requests==2.28.1
 BeautifulSoup4==4.11.1
 sqlalchemy==1.4.47
 mysql-connector-python==8.0.31
+numpy==1.23.5

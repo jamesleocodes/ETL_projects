@@ -34,7 +34,7 @@ This project is a basic implementation of an ETL (Extract, Transform, Load) pipe
   python etl_car.py
   ```
 
-### Person: ETL for Person Data (`etl_test.py`)
+### Person: ETL for Person Data (`etl_person.py`)
 
 #### Overview
 This project processes person-related data, extracting fields such as `name`, `height`, and `weight`. The pipeline converts height from inches to meters and weight from pounds to kilograms.
@@ -146,16 +146,18 @@ This project processes movie-related data by scraping information from a webpage
 ```
 etl/
 ├── data/
-│   ├── person/                     # Sample data files for person data
-│   ├── car/                        # Sample data files for car data
-│   ├── movies/                     # Sample data files for movie data
-│   └── gdp/                        # Sample data files for gdp by countries
+│   ├── person/                     # Data files for person data
+│   ├── car/                        # Data files for car data
+│   ├── movies/                     # Data files for movie data
+│   ├── gdp/                        # Data files for gdp by countries
+│   └── bank/                       # Data files for exchange rate
 ├── output/                         # Processed data (e.g., CSVs, SQLite DBs)
 ├── src/                            # ETL scripts (renamed from scripts/)
 │   ├── etl_person.py               # ETL script for person data (renamed from etl_test.py)
 │   ├── etl_car.py                  # ETL script for car data
 │   ├── etl_webscrape_movies.py     # ETL script for movie data 
-│   └── etl_gdp.py                  # ETL script for gdp scraping
+│   ├── etl_gdp.py                  # ETL script for gdp scraping
+│   └── banks_project.py            # ETL script for bank information scraping
 ├── tests/
 │   ├── test_etl_person.py          # Unit test for etl_person.py
 │   ├── test_etl_car.py             # Unit test for etl_car.py
