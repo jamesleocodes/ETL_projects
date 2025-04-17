@@ -13,3 +13,7 @@ disable=
     C0111, # Missing docstring
     R0903, # Too few public methods 
     C0413 # Import not at top of file
+    W0105 
+    W0621
+    C0411
+    R0801
