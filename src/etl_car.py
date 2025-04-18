@@ -30,8 +30,11 @@ with open(config_path, "r", encoding="utf-8") as stream:
 base_path = os.path.abspath(os.path.dirname(__file__))
 log_file = os.path.join(base_path, "../output/log_file_car.txt")
 os.makedirs(os.path.dirname(log_file), exist_ok=True)
-target_file = config["etl_car"]["target"]["location"]
-data_folder = config["etl_car"]["source"]["location"]
+
+target_file = os.path.join(base_path, "../output/car_data.csv")
+#target_file = config["etl_car"]["target"]["location"]
+data_folder = os.path.join(base_path, "../data_car")
+#data_folder = config["etl_car"]["source"]["location"]
 
 
 # Develop functions to extract data from different formats

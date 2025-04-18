@@ -1,0 +1,15 @@
+ETL Job Started!
+
+Extract phase Started!
+
+Extract phase Ended!
+
+Transform phase Started!
+
+Transform phase Ended!
+
+Load phase Started!
+
+Load phase Ended!
+
+ETL Job Ended!
