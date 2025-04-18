@@ -21,7 +21,7 @@ jobs:
         pip install -r requirements.txt
         
     - name: Set working directory
-      run: cd /home/runner/work/ETL_projects/ETL_projects
+      run: cd /home/runner/work/ETL_projects/
     
     - name: Create necessary directories
       run: |
