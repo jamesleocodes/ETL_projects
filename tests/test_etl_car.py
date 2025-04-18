@@ -2,9 +2,11 @@ import unittest
 from unittest.mock import patch, mock_open, MagicMock
 import pandas as pd
 import sys
-
+import os
 sys.path.append("../src")
-from etl_car import (
+# Add the 'src' directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from src.etl_car import (
     extract_from_csv,
     extract_from_json,
     extract_from_xml,

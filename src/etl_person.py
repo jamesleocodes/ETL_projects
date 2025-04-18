@@ -11,21 +11,8 @@ from datetime import datetime
 import pandas as pd
 import yaml  # Import PyYAML for reading config files
 
-
-# Define a log_progress function directly in this file
-def log_progress(message, log_file):
-    """Log the message with timestamp to the specified log file.
-
-    Args:
-        message (str): Message to log
-        log_file (str): Path to the log file
-    """
-    timestamp_format = "%Y-%h-%d-%H:%M:%S"  # Year-Monthname-Day-Hour-Minute-Second
-    now = datetime.now()
-    timestamp = now.strftime(timestamp_format)
-    with open(log_file, "a", encoding="utf-8") as f:
-        f.write(f"{timestamp} - {message}\n")
-
+# Import local modules
+from utils import log_progress
 
 # Load configuration from config.yaml
 with open("../config.yaml", "r", encoding="utf-8") as stream:
