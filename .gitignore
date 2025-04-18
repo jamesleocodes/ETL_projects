@@ -21,6 +21,7 @@ venv/
 
 # Testing and logs
 *.log
+*.pylintrc
 pytest_cache/
 .pytest_cache/
 coverage/
@@ -37,4 +38,3 @@ data/
 tmp/
 *.bak
 *.temp
-*.pylintrc
