@@ -57,14 +57,14 @@ conn = mysql.connector.connect(
     host="localhost",
     database=DB_NAME,
     user="root",
-    password="chosandarhtet",
+    password="yourpassword",
     port="3306",
 )
 print("Connected to MySQL database")
 
 # Create a SQLAlchemy engine
 engine = sqlalchemy.create_engine(
-    f"mysql+mysqlconnector://root:chosandarhtet@localhost:3306/{DB_NAME}"
+    f"mysql+mysqlconnector://root:yourpassword@localhost:3306/{DB_NAME}"
 )
 
 # Check if the table exists, and create it if it doesn't
