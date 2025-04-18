@@ -1,15 +1,5 @@
-ETL Job Started!
-
-Extract phase Started!
-
-Extract phase Ended!
-
-Transform phase Started!
-
-Transform phase Ended!
-
-Load phase Started!
-
-Load phase Ended!
-
-ETL Job Ended!
+2025-04-18 19:52:19 : Preliminaries complete. Initiating ETL process
+2025-04-18 19:52:19 : Data extraction complete. Initiating Transformation process
+2025-04-18 19:52:19 : Data transformation complete. Initiating loading process
+2025-04-18 19:52:19 : Data saved to CSV file
+2025-04-18 19:52:19 : ETL Job Ended!

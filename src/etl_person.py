@@ -9,18 +9,40 @@ import glob
 import xml.etree.ElementTree as ET
 import pandas as pd
 import yaml  # Import PyYAML for reading config files
+import sys
+import os
+from datetime import datetime
+
+
+# # Load configuration from config.yaml
+# with open("../config.yaml", "r", encoding="utf-8") as stream:
+#     config = yaml.safe_load(stream)
+
+# # Get paths dynamically from config.yaml
+# log_file = config["etl_person"]["logging"]["location"]
+# target_file = config["etl_person"]["target"]["location"]
+# data_folder = config["etl_person"]["source"]["location"]
+
+# Add the 'src' directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Import local modules
-from utils import log_progress
+from src.utils import log_progress
 
 # Load configuration from config.yaml
-with open("../config.yaml", "r", encoding="utf-8") as stream:
+config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../config.yaml")
+with open(config_path, "r", encoding="utf-8") as stream:
     config = yaml.safe_load(stream)
 
 # Get paths dynamically from config.yaml
-log_file = config["etl_person"]["logging"]["location"]
-target_file = config["etl_person"]["target"]["location"]
-data_folder = config["etl_person"]["source"]["location"]
+#log_file = config["etl_car"]["logging"]["location"]
+base_path = os.path.abspath(os.path.dirname(__file__))
+log_file = os.path.join(base_path, "../output/log_file_person.txt")
+os.makedirs(os.path.dirname(log_file), exist_ok=True)
+target_file = os.path.join(base_path, "../output/person_data.csv")
+data_folder = os.path.join(base_path, "../data_person")
+
+
 
 
 # Develop functions to extract data from different formats
@@ -120,31 +142,45 @@ def load_data(output_path, data_frame):
     data_frame.to_csv(output_path, index=False)
 
 
-# Log the initialization of the ETL process
-log_progress("ETL Job Started", log_file)
+# # Log the initialization of the ETL process
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("ETL Job Started!\n")
 
+
+log_progress("Preliminaries complete. Initiating ETL process", log_file)
 # Log the beginning of the Extraction process
-log_progress("Extract phase Started", log_file)
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nExtract phase Started!\n")
 extracted_data = extract()
 
-# Log the completion of the Extraction process
-log_progress("Extract phase Ended", log_file)
+log_progress("Data extraction complete. Initiating Transformation process", log_file)
 
-# Log the beginning of the Transformation process
-log_progress("Transform phase Started", log_file)
+# # Log the completion of the Extraction process
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nExtract phase Ended!\n")
+
+# # Log the beginning of the Transformation process
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nTransform phase Started!\n")
 transformed_data = transform(extracted_data)
 print("Transformed Data")
 print(transformed_data)
+log_progress("Data transformation complete. Initiating loading process", log_file)
 
-# Log the completion of the Transformation process
-log_progress("Transform phase Ended", log_file)
+# # Log the completion of the Transformation process
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nTransform phase Ended!\n")
 
-# Log the beginning of the Loading process
-log_progress("Load phase Started", log_file)
+# # Log the beginning of the Loading process
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nLoad phase Started!\n")
 load_data(output_path=target_file, data_frame=transformed_data)
-
+log_progress("Data saved to CSV file", log_file)
+log_progress("ETL Job Ended!", log_file)
 # Log the completion of the Loading process
-log_progress("Load phase Ended", log_file)
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nLoad phase Ended!\n")
 
 # Log the completion of the ETL process
-log_progress("ETL Job Ended", log_file)
+# with open(log_file, "a", encoding="utf-8") as f:
+#     f.write("\nETL Job Ended!\n")

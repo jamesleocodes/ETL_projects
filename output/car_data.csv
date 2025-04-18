@@ -59,33 +59,33 @@ year_of_manufacture,price,fuel,car_model
 2006,1567.16,Petrol,wagon r
 2015,8656.72,Petrol,ertiga
 2017,11567.16,Petrol,ciaz
-2016,21985.07,Diesel,
-2015,7089.55,Diesel,
-2017,34328.36,Diesel,
-2015,18656.72,Diesel,
-2005,5208.96,Diesel,
-2006,3731.34,Petrol,
-2010,52238.81,Diesel,
-2012,8805.97,Petrol,
-2013,5149.25,Petrol,
-2014,7089.55,Petrol,
-2014,5895.52,Diesel,
-2011,6716.42,Diesel,
-2013,11119.4,Petrol,
-2011,3955.22,Petrol,
-2014,7313.43,Diesel,
-2015,5895.52,Petrol,
-2013,8208.96,Petrol,
-2004,2238.81,Petrol,
-2010,7835.82,Petrol,
-2012,21641.79,Diesel,
-2013,10373.13,Petrol,
-2015,6716.42,Petrol,
-2014,27985.07,Diesel,
-2015,35074.63,Diesel,
-2017,49253.73,Diesel,
-2014,7089.55,Diesel,
-2017,29477.61,Petrol,
-2010,13805.97,Diesel,
-2011,6492.54,Petrol,
-2016,21268.66,Petrol,
+2016,21985.07,Diesel,corolla altis
+2015,7089.55,Diesel,etios gd
+2017,34328.36,Diesel,innova
+2015,18656.72,Diesel,innova
+2005,5208.96,Diesel,innova
+2006,3731.34,Petrol,camry
+2010,52238.81,Diesel,land cruiser
+2012,8805.97,Petrol,corolla altis
+2013,5149.25,Petrol,etios liva
+2014,7089.55,Petrol,etios g
+2014,5895.52,Diesel,etios liva
+2011,6716.42,Diesel,corolla altis
+2013,11119.4,Petrol,corolla altis
+2011,3955.22,Petrol,etios liva
+2014,7313.43,Diesel,etios cross
+2015,5895.52,Petrol,etios g
+2013,8208.96,Petrol,corolla altis
+2004,2238.81,Petrol,corolla
+2010,7835.82,Petrol,corolla altis
+2012,21641.79,Diesel,fortuner
+2013,10373.13,Petrol,corolla altis
+2015,6716.42,Petrol,etios cross
+2014,27985.07,Diesel,fortuner
+2015,35074.63,Diesel,fortuner
+2017,49253.73,Diesel,fortuner
+2014,7089.55,Diesel,etios liva
+2017,29477.61,Petrol,innova
+2010,13805.97,Diesel,fortuner
+2011,6492.54,Petrol,corolla altis
+2016,21268.66,Petrol,corolla altis

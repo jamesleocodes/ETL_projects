@@ -1,40 +1,5 @@
-2025-Apr-18-02:51:38 - ETL Job Started
-2025-Apr-18-02:51:38 - Extract phase Started
-2025-Apr-18-02:51:38 - Extract phase Ended
-2025-Apr-18-02:51:38 - Transform phase Started
-2025-Apr-18-02:51:38 - Transform phase Ended
-2025-Apr-18-02:51:38 - Load phase Started
-2025-Apr-18-02:51:38 - Load phase Ended
-2025-Apr-18-02:51:38 - ETL Job Ended
-2025-Apr-18-03:03:34 - ETL Job Started
-2025-Apr-18-03:03:34 - Extract phase Started
-2025-Apr-18-03:03:34 - Extract phase Ended
-2025-Apr-18-03:03:34 - Transform phase Started
-2025-Apr-18-03:03:34 - Transform phase Ended
-2025-Apr-18-03:03:34 - Load phase Started
-2025-Apr-18-03:03:34 - Load phase Ended
-2025-Apr-18-03:03:34 - ETL Job Ended
-2025-Apr-18-03:05:45 - ETL Job Started
-2025-Apr-18-03:05:45 - Extract phase Started
-2025-Apr-18-03:05:45 - Extract phase Ended
-2025-Apr-18-03:05:45 - Transform phase Started
-2025-Apr-18-03:05:45 - Transform phase Ended
-2025-Apr-18-03:05:45 - Load phase Started
-2025-Apr-18-03:05:45 - Load phase Ended
-2025-Apr-18-03:05:45 - ETL Job Ended
-2025-Apr-18-03:08:55 - ETL Job Started
-2025-Apr-18-03:08:55 - Extract phase Started
-2025-Apr-18-03:08:55 - Extract phase Ended
-2025-Apr-18-03:08:55 - Transform phase Started
-2025-Apr-18-03:08:55 - Transform phase Ended
-2025-Apr-18-03:08:55 - Load phase Started
-2025-Apr-18-03:08:55 - Load phase Ended
-2025-Apr-18-03:08:55 - ETL Job Ended
-2025-Apr-18-03:18:10 - ETL Job Started
-2025-Apr-18-03:18:10 - Extract phase Started
-2025-Apr-18-03:18:10 - Extract phase Ended
-2025-Apr-18-03:18:10 - Transform phase Started
-2025-Apr-18-03:18:10 - Transform phase Ended
-2025-Apr-18-03:18:10 - Load phase Started
-2025-Apr-18-03:18:10 - Load phase Ended
-2025-Apr-18-03:18:10 - ETL Job Ended
+2025-04-18 19:52:16 : Preliminaries complete. Initiating ETL process
+2025-04-18 19:52:16 : Data extraction complete. Initiating Transformation process
+2025-04-18 19:52:16 : Data transformation complete. Initiating loading process
+2025-04-18 19:52:16 : Data saved to CSV file
+2025-04-18 19:52:16 : ETL Job Ended!
