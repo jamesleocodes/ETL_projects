@@ -28,7 +28,7 @@ with open(config_path, "r", encoding="utf-8") as stream:
 # Get paths dynamically from config.yaml
 # log_file = config["etl_car"]["logging"]["location"]
 base_path = os.path.abspath(os.getcwd())
-log_file = os.path.join(base_path, "../output/log_file_car.txt")
+log_file = os.path.join(base_path, "output/log_file_car.txt")
 target_file = config["etl_car"]["target"]["location"]
 data_folder = config["etl_car"]["source"]["location"]
 
