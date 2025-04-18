@@ -21,7 +21,7 @@ jobs:
         pip install -r requirements.txt
         
     - name: Set working directory
-      run: ls -R
+      run: pwd
     
     - name: Create necessary directories
       run: |
