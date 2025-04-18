@@ -7,7 +7,6 @@ data from imperial to metric units, and loads the results to a target CSV file.
 # Load the necessary libraries
 import glob
 import xml.etree.ElementTree as ET
-from datetime import datetime
 import pandas as pd
 import yaml  # Import PyYAML for reading config files
 
