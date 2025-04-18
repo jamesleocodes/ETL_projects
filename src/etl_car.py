@@ -21,8 +21,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.utils import log_progress
 
 # Load configuration from config.yaml
-# Use absolute path to avoid relative path issues
-config_path = os.path.join(os.getcwd(), "../config.yaml")
+config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../config.yaml")
 with open(config_path, "r", encoding="utf-8") as stream:
     config = yaml.safe_load(stream)
 
