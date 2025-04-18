@@ -17,3 +17,4 @@ disable=
     W0621, # Redefined outer name 'log_file' from line 1
     C0411, # First argument of 'with' must be a context manager
     R0801, # Similar lines in if/else branches
+    W0611, # Unused import
