@@ -18,3 +18,5 @@ disable=
     C0411, # First argument of 'with' must be a context manager
     R0801, # Similar lines in if/else branches
     W0611, # Unused import
+    C0304, # Module level import not at top of file
+    W0718 # Unused argument
