@@ -8,6 +8,30 @@ This project is a basic implementation of an ETL (Extract, Transform, Load) pipe
 - **Transform**: Clean, filter, and manipulate data to fit the desired format.
 - **Load**: Store the processed data into a database or file.
 
+## Unit Test
+The Simple ETL Project test suite validates the extract, transform, and load (ETL) pipeline for processing car and person data, ensuring robust and reliable data handling.
+
+
+### test_etl_car.py
+- **Extract**: Validates data extraction from CSV, JSON, and XML formats, with specific handling for missing `car_model` fields.
+- **Transform**: Rounds prices to two decimal places and replaces missing `car_model` values with "Unknown".
+- **Load**: Ensures the transformed data is correctly saved to a CSV file.
+
+### test_etl_person.py
+- **Extract**: Validates data extraction from CSV, JSON, and XML formats.
+- **Transform**: Converts height to meters and weight to kilograms.
+- **Load**: Verifies that the transformed data is saved to a CSV file.
+
+## Continuous Integration (CI) pipeline
+
+The CI pipeline is automated using GitHub Actions (`.github/workflows/ci.yaml`) and performs the following steps:
+- Sets up a Python 3.10 environment.
+- Installs dependencies, including `pytest` and `pylint`.
+- Runs linting with `pylint` to enforce code quality.
+- Executes tests for both `test_etl_car.py` and `test_etl_person.py` suites.
+
+The CI pipeline runs on every push or pull request, ensuring the reliability and consistency of the ETL pipeline.
+
 ## Requirements
 
 - Python 3.8+
@@ -176,8 +200,7 @@ etl/
 │   └── banks_project.py            # ETL script for bank information scraping
 ├── tests/
 │   ├── test_etl_person.py          # Unit test for etl_person.py
-│   ├── test_etl_car.py             # Unit test for etl_car.py
-│   └── test_etl_movies.py          # Unit test for etl_movies.py (new)
+│   └──  test_etl_car.py            # Unit test for etl_car.py
 ├── config.yaml                     # Configuration file
 ├── requirements.txt                # Python dependencies
 ├── .gitignore                      # Git ignore file
