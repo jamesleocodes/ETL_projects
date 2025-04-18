@@ -26,7 +26,10 @@ with open(config_path, "r", encoding="utf-8") as stream:
     config = yaml.safe_load(stream)
 
 # Get paths dynamically from config.yaml
-log_file = config["etl_car"]["logging"]["location"]
+#log_file = config["etl_car"]["logging"]["location"]
+base_path = os.path.abspath(os.path.dirname(__file__))
+log_file = os.path.join(base_path, "../output/log_file_car.txt")
+os.makedirs(os.path.dirname(log_file), exist_ok=True)
 target_file = config["etl_car"]["target"]["location"]
 data_folder = config["etl_car"]["source"]["location"]
 
@@ -131,30 +134,39 @@ def load_data(out_path, data_frame):
 
 
 # Log the initialization of the ETL process
-log_progress("ETL Job Started", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("ETL Job Started!\n")
+
 
 # Log the beginning of the Extraction process
-log_progress("Extract phase Started", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nExtract phase Started!\n")
 extracted_data = extract()
 
 # Log the completion of the Extraction process
-log_progress("Extract phase Ended", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nExtract phase Ended!\n")
 
 # Log the beginning of the Transformation process
-log_progress("Transform phase Started", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nTransform phase Started!\n")
 transformed_data = transform(extracted_data)
 print("Transformed Data")
 print(transformed_data)
 
 # Log the completion of the Transformation process
-log_progress("Transform phase Ended", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nTransform phase Ended!\n")
 
 # Log the beginning of the Loading process
-log_progress("Load phase Started", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nLoad phase Started!\n")
 load_data(out_path=target_file, data_frame=transformed_data)
 
 # Log the completion of the Loading process
-log_progress("Load phase Ended", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nLoad phase Ended!\n")
 
 # Log the completion of the ETL process
-log_progress("ETL Job Ended", log_file)
+with open(log_file, "a", encoding="utf-8") as f:
+    f.write("\nETL Job Ended!\n")
