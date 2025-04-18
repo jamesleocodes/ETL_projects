@@ -1,6 +1,5 @@
 # ETL Project
-
-This project is a basic implementation of an ETL (Extract, Transform, Load) pipeline. It demonstrates how to extract data from a source, transform it to meet specific requirements, and load it into a target destination.
+This project demonstrates the process of extracting data from a source, transforming it to align with specific criteria, and loading it into a designated destination, such as a MySQL database. It also includes steps for setting up the MySQL database include installation, schema creation, connection configuration, and uploading transformed data into the tables. Additionally, it highlights the importance of incorporating unit tests to verify functionality at each stage of the pipeline and automated Continuous Integration (CI) workflows using GitHub Actions. The CI pipeline ensures reliability by automating tasks such as dependency installation, running tests, and validating changes whenever code is pushed or updated, streamlining development and maintaining high code quality.
 
 ## Features
 
