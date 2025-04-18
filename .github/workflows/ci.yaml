@@ -25,11 +25,16 @@ jobs:
     - name: Lint with pylint
       run: |
         pylint src/*.py
-        
-    - name: Test with pytest
+    
+    - name: Unit Test
       run: |
-        pytest --cov=src src/*.py
+        python tests/test_etl_car.py
+        python tests/test_etl_person.py
         
-    - name: Generate coverage report
-      run: |
-        pytest --cov=src --cov-report=xml src/*.py 
+    # - name: Test with pytest
+    #   run: |
+    #     pytest --cov=src src/*.py
+        
+    # - name: Generate coverage report
+    #   run: |
+    #     pytest --cov=src --cov-report=xml src/*.py 
