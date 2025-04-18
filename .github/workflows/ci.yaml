@@ -20,9 +20,6 @@ jobs:
         pip install pytest pylint pytest-cov
         pip install -r requirements.txt
         
-    - name: Set working directory
-      run: cd /home/runner/work/
-    
     - name: Create necessary directories
       run: |
         mkdir -p output
