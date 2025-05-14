@@ -1,0 +1,16 @@
+{
+    "noaa_api_key": "",
+    "database_path": "data/storm_data.db",
+    "start_date": "2020-01-01",
+    "end_date": "2023-12-31",
+    "data_retention_days": 365,
+    "batch_size": 1000,
+    "logging": {
+        "level": "INFO",
+        "file": "etl_process.log"
+    },
+    "data_directories": {
+        "raw": "data/raw",
+        "processed": "data/processed"
+    }
+} 
