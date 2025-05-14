@@ -213,3 +213,105 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.
+
+# Simple ETL Projects
+
+This repository contains a collection of simple ETL (Extract, Transform, Load) projects that demonstrate different data processing techniques and tools.
+
+## Projects
+
+### Movies : ETL for movie data (`movies_project.py`)
+
+#### Overview
+This project extracts movie data from a web source, transforms it into a structured format, and loads it into both a CSV file and a MySQL database. The project demonstrates web scraping, data cleaning, and database operations.
+
+#### Features
+- **Extraction**: Scrapes movie data from a webpage using `BeautifulSoup`.
+- **Transformation**: Cleans and structures the scraped data into a tabular format.
+- **Loading**: 
+  - Saves the transformed data into a CSV file.
+  - Inserts the data into a MySQL database table.
+- **Configuration**: Dynamically loads configurations (e.g., URL, database name, table name, and file paths) from a `config.yaml` file.
+
+### Bank : ETL for bank data (`banks_project.py`)
+
+#### Overview
+This bank project extracts data about the largest banks by market capitalization from a web source. The data is transformed by converting market cap values from USD to other currencies like GBP, EUR, and INR. Transformed data is loaded into both a CSV file and a MySQL database for storage and analysis. The project includes logging capabilities to track progress throughout the ETL pipeline.
+
+### Storm Dynamics : ETL for atmospheric data (`phase1etl.py`)
+
+#### Overview
+This project implements an ETL pipeline for processing atmospheric data related to Severe Convective Storm (SCS) events. It extracts simulated atmospheric data, transforms it by calculating various indices and classifications, and loads the processed data into a SQLite database for analysis.
+
+#### Features
+- **Extraction**:
+  - Simulates atmospheric data generation (CAPE, wind shear, temperature, humidity)
+  - Saves raw data to CSV files in `data/raw` directory
+  - Configurable date ranges and data parameters
+
+- **Transformation**:
+  - Calculates SCS Index using normalized CAPE and wind shear values
+  - Classifies storm events based on atmospheric conditions
+  - Adds seasonal information to the data
+  - Performs data validation and quality checks
+  - Saves processed data to CSV files in `data/processed` directory
+
+- **Loading**:
+  - Creates and manages SQLite database
+  - Implements efficient data loading with batch processing
+  - Creates necessary indexes for optimized queries
+  - Includes data versioning and tracking
+
+- **Configuration**:
+  - Uses `config.json` for dynamic configuration
+  - Configurable parameters for:
+    - Database settings
+    - Date ranges
+    - Data retention policies
+    - Batch processing sizes
+    - Logging levels
+
+- **Additional Features**:
+  - Comprehensive logging system
+  - Error handling and recovery
+  - Data verification and validation
+  - Progress tracking
+  - Integration with analysis pipeline
+
+#### Usage
+1. Configure the ETL process in `config.json`
+2. Run the ETL pipeline:
+   ```bash
+   python phase1etl.py
+   ```
+3. The processed data will be available in:
+   - SQLite database: `data/storm_data.db`
+   - Processed CSV files: `data/processed/`
+   - Log file: `etl_process.log`
+
+#### Analysis Integration
+The ETL pipeline is integrated with an analysis script (`phase1.py`) that:
+- Loads processed data from the database
+- Performs attribution analysis
+- Generates visualizations
+- Produces statistical insights
+
+## Requirements
+- Python 3.9+
+- Required packages listed in `requirements.txt`
+- SQLite3 for database operations
+- Configuration files for each project
+
+## Installation
+1. Clone the repository
+2. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Configure the projects using their respective configuration files
+
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
